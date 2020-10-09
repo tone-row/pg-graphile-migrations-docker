@@ -1,0 +1,26 @@
+version: "3.4"
+
+services:
+  database:
+    image: postgres
+    environment:
+      POSTGRES_DB: tahin
+      POSTGRES_USER: tahin
+      POSTGRES_PASSWORD: tahin
+    ports:
+      - "5432:5432"
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile.dev
+    environment:
+      PGUSER: tahin
+      PGHOST: database
+      PGPASSWORD: tahin
+      PGDATABASE: tahin
+      PGPORT: 5432
+    depends_on:
+      - "database"
+    volumes:
+      - /app/node_modules
+      - ./server/src:/app/src
