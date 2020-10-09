@@ -3,4 +3,6 @@ WORKDIR /app
 COPY package.json yarn.lock ./
 RUN yarn
 COPY . .
+RUN ["chmod", "+x", "/app/start.dev.sh"]
+EXPOSE 5000
 CMD [ "yarn", "dev" ]

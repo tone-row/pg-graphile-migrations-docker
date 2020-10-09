@@ -4,23 +4,23 @@ services:
   database:
     image: postgres
     environment:
-      POSTGRES_DB: tahin
-      POSTGRES_USER: tahin
-      POSTGRES_PASSWORD: tahin
+      POSTGRES_PASSWORD: password
     ports:
       - "5432:5432"
+    volumes:
+      - ./db-init-scripts:/docker-entrypoint-initdb.d
   server:
     build:
       context: ./server
       dockerfile: Dockerfile.dev
-    environment:
-      PGUSER: tahin
-      PGHOST: database
-      PGPASSWORD: tahin
-      PGDATABASE: tahin
-      PGPORT: 5432
     depends_on:
       - "database"
     volumes:
       - /app/node_modules
-      - ./server/src:/app/src
+      - ./server:/app
+    environment:
+      DATABASE_URL: "postgres://appuser:password@database/myapp"
+      SHADOW_DATABASE_URL: "postgres://appuser:password@database/myapp_shadow"
+      ROOT_DATABASE_URL: "postgres://postgres:password@database/postgres"
+    ports:
+      - "5000:5000"
