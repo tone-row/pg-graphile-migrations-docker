@@ -5,7 +5,8 @@ CREATE SCHEMA forum_example;
 CREATE TABLE forum_example.person (
   id               SERIAL PRIMARY KEY,
   first_name       TEXT NOT NULL CHECK (char_length(first_name) < 80),
-  middle_name      TEXT CHECK (char_length(middle_name) < 80)
+  middle_name      TEXT CHECK (char_length(middle_name) < 80),
+  last_name      TEXT CHECK (char_length(last_name) < 80)
 );
 
 CREATE TABLE forum_example.votes (
