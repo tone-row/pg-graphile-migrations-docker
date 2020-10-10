@@ -1,8 +1,11 @@
 #!/bin/sh
 ./node_modules/.bin/postgraphile \
   --host 0.0.0.0 \
-  --subscriptions \
+  --connection $DATABASE_URL \
+  --schema app_public \
   --watch \
+  --enhance-graphiql \
+  --subscriptions \
   --dynamic-json \
   --no-setof-functions-contain-nulls \
   --no-ignore-rbac \
@@ -10,12 +13,7 @@
   --show-error-stack=json \
   --extended-errors hint,detail,errcode \
   --append-plugins @graphile-contrib/pg-simplify-inflector \
-  --export-schema-graphql schema.graphql \
   --graphiql "/" \
-  --enhance-graphiql \
   --allow-explain \
   --enable-query-batching \
-  --legacy-relations omit \
-  --connection $DATABASE_URL \
-  --owner-connection $ROOT_DATABASE_URL \
-  --schema forum_example
+  --legacy-relations omit

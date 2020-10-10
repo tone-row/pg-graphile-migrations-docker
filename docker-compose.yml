@@ -19,8 +19,8 @@ services:
       - /app/node_modules
       - ./server:/app
     environment:
-      DATABASE_URL: "postgres://appuser:password@database/myapp"
-      SHADOW_DATABASE_URL: "postgres://appuser:password@database/myapp_shadow"
+      DATABASE_URL: "postgres://postgres:password@database/myapp"
+      SHADOW_DATABASE_URL: "postgres://postgres:password@database/myapp_shadow"
       ROOT_DATABASE_URL: "postgres://postgres:password@database/postgres"
     ports:
       - "5000:5000"

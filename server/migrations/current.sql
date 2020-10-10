@@ -1,15 +1,9 @@
-DROP SCHEMA IF EXISTS forum_example CASCADE;
+DROP SCHEMA IF EXISTS app_public CASCADE;
 
-CREATE SCHEMA forum_example;
+CREATE SCHEMA app_public;
 
-CREATE TABLE forum_example.person (
-  id               SERIAL PRIMARY KEY,
-  first_name       TEXT NOT NULL CHECK (char_length(first_name) < 80),
-  middle_name      TEXT CHECK (char_length(middle_name) < 80),
-  last_name      TEXT CHECK (char_length(last_name) < 80)
+CREATE TABLE app_public.post (
+    id SERIAL PRIMARY KEY,
+    title TEXT NOT NULL,
+    content TEXT
 );
-
-CREATE TABLE forum_example.votes (
-  id    SERIAL PRIMARY KEY,
-  vote  TEXT
-)
